@@ -1,10 +1,8 @@
-const test=require('../controller/user.controller')
+const express = require('express');
+const router = express.Router();
+const userController = require('../controller/user.controller');
 
-const express=require('express')
-const router=express.Router()
-router.get('/test',test)
+// Define the route with the correct controller method
+router.get('/test', userController.test);
 
-// export default router;
-module.exports={
-    router
-};
+module.exports = router;
