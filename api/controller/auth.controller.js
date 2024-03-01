@@ -1,6 +1,7 @@
 const User=require('../models/user.model.js')
 const bcrypt=require('bcrypt')
-import { errorHandler } from '../utils/error.js';
+const { errorHandler } = require('../utils/error');
+
 const signup=async (req,res,next)=> {
     const {username, email, password}=req.body;
     const hashedPassword= bcrypt.hashSync(password,10);
