@@ -6,8 +6,6 @@ import { signInStart,signInSuccess,signInFailure } from '../redux/user/userSlice
 
 export default function SignIn() {
   const [formData,setFormData]=useState({});
-  // const [error,setError]=useState(null);
-  // const [loading,setLoading]=useState(false);
   const {loading,error}=useSelector((state)=>state.user);
   const navigate=useNavigate();
   const dispatch=useDispatch();
@@ -18,12 +16,10 @@ export default function SignIn() {
         [e.target.id]:e.target.value,
       }
     )
-// console.log(formData)
   }
   const handleSubmit =  async (e) =>{
-    e.preventDefault(); // prevent to refresh page for null values
+    e.preventDefault();
     try{
-      // setLoading(true);
       dispatch(signInStart);
       const res=await fetch('/api/auth/signin',
       {
@@ -37,25 +33,16 @@ export default function SignIn() {
       const data=await res.json();
       if(data.sucess===false)
       {
-        // setError(data.message);
         dispatch(signInFailure(data.message));
-        // setLoading(false);
         return;
       }
-      // setLoading(false);
-      // setError(null);
       dispatch(signInSuccess(data));
       navigate('/');
-
     }
     catch(error)
     {
-      // setLoading(false);
-      // setError(error.message);
       dispatch(signInFailure(error.message));
     }
-    
-    // console.log(data);
   };
   return (
     <div className='p-3 max-w-lg mx-auto'>
